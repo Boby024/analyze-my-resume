@@ -7,6 +7,16 @@
 analyze-my-name/
 ├── backend/
 │   ├── src            # Application source code (routes, models, utils, etc.)
+        ├── core          # AI structure: extractor (text from pdf), Generation of suggestions
+        ├── logs          # logs are stored and could be saved in the databse (in future)
+        ├── model         # sqlalchemy db model
+        ├── payload       # for request and response via routes
+        ├── service       # logic behind routes and integration of core logic
+        ├── utils         # for features such as: token_required, log script and helper functions
+        ├── app.py        # contains function for creating flask app
+        ├── config.py     # for importing flask app configuration variables
+        ├── extensions.py # declarations of main flask features extensions
+        
 |   ├── requirements.txt
 |   ├── .env           # Environment variables for Flask settings
 |   ├── run.py         # Entry point for the Flask application
