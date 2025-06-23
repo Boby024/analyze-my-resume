@@ -104,3 +104,7 @@ missing keywords, and offer AI-powered improvement suggestions using NLP and the
     </ul>
   </li>
 </ol>
+
+<h2>Run the project</h2>
+<li> Backend: follow instructions in README.md inside the folder "backend"</li>
+<li> Frontend: follow instructions in README.md inside the folder "frontend"</li>
