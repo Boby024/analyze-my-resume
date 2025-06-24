@@ -22,7 +22,7 @@ def token_required(f):
         auth_header = request.headers.get('Authorization')
 
         if not auth_header or not auth_header.startswith("Bearer "):
-            return response.response_error("Token is missing!", 401)
+            return response.response_msg("Token is missing!", 401)
 
         token = auth_header.split(" ")[1]
 
@@ -35,14 +35,14 @@ def token_required(f):
             # Query the database for the user
             user = User.query.filter_by(id=user_id, email=email).one_or_none()
             if not user:
-                return response.response_error("Invalid user!", 401)
+                return response.response_msg("Invalid user!", 401)
 
         except jwt.ExpiredSignatureError:
-            return response.response_error("Token has expired!", 401)
+            return response.response_msg("Token has expired!", 401)
         except jwt.InvalidTokenError:
-            return response.response_error("Invalid token!", 401)
+            return response.response_msg("Invalid token!", 401)
         except NoResultFound:
-            return response.response_error("User not found in the database!", 401)
+            return response.response_msg("User not found in the database!", 401)
 
         return f(user, *args, **kwargs)
     return decorated
@@ -69,7 +69,7 @@ def roles_required(required_roles):
 
             # Check if the user has any of the required roles
             if not any(role in user_roles for role in required_roles):
-                return response.response_error("Access denied! Insufficient permissions.", 403)
+                return response.response_msg("Access denied! Insufficient permissions.", 403)
 
             return fn(*args, **kwargs)
         return decorated

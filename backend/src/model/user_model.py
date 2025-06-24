@@ -20,9 +20,8 @@ class User(db.Model):
     description = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=helper.get_dt_utcnow())
     updated_at = db.Column(db.DateTime, nullable=True)
-    is_email_verified = db.Column(db.Boolean, default=False, nullable=False)
-    role = db.Column(db.String(120), nullable=True)
-    email_verifications = db.Column(db.Boolean, default=False, nullable=True)
+    is_email_verified = db.Column(db.Boolean, default=False, nullable=True)
+    role = db.Column(db.String(120), nullable=False)
 
     def set_password(self, plaintext_password):
         salted_password = plaintext_password + PASSWORD_SECRET_KEY  # Add secret key to password

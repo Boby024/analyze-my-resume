@@ -20,14 +20,14 @@ def create_user():
         auth_resp = user_service.register(urr)
 
         if auth_resp is None:
-            return response.response_error("Invalid credentials! Or Email already used", 400)
+            return response.response_msg("Email already used OR Invalid credentials!", 400)
     except Exception as e:
         print(e)
-        return response.response_error("Missing Attributes: username, password, email, firstname, lastname", 400)
+        return response.response_msg("Missing Attributes: username, password, email, firstname, lastname", 400)
 
     if auth_resp:
         return response.response_data(auth_resp.serialize(), 201)
-    response.response_error("Internal Error", 500)
+    response.response_msg("Internal Server Error", 500)
 
 
 @user_bp.route('/login', methods=['POST'])
@@ -39,10 +39,10 @@ def login():
         if login_response:
             return response.response_data(login_response.serialize(), 200)
         else:
-            return response.response_error("Invalid credentials!", 400)
+            return response.response_msg("Invalid credentials!", 400)
     except Exception as e:
         print(e)
-        return response.response_error("Missing username or password!", 400)
+        return response.response_msg("Internal Server Error!", 500)
 
 
 @user_bp.route('/users', methods=['GET'])
@@ -54,5 +54,5 @@ def get_users(user):
         return response.response_data(data=users, code=200, serialized=True)
     except Exception as e:
         print(e)
-        return response.response_error("Internal Server Error", 500)
+        return response.response_msg("Internal Server Error", 500)
 

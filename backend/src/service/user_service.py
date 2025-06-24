@@ -62,9 +62,9 @@ def verify_email(data):
     email = data["email"]
     code = data["code"]
     user = User.query.filter_by(email=data.email).first()
-    if user:
-        email_verifications = EmailVerification.query.filter_by(email=email).first()
-        pass
+    # if user:
+    #     email_verifications = EmailVerification.query.filter_by(email=email).first()
+    #     pass
 
 
 def get_users():

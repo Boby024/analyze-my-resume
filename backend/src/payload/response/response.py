@@ -7,18 +7,17 @@ def response_data(data, code, serialized=False):
     }
     if serialized == True:
         data = [item.serialize() for item in data]
-        print(data)
         return make_response(jsonify(data), code, headers)
     return make_response(jsonify(data), code, headers)
 
 
-def response_error(text: str = None, code=500):
+def response_msg(text: str = None, code=500):
     headers = {
         "Content-Type": "text/json",
     }
     if text:
-        msg = {"message": text}
+        msg = {"msg_": text}
     else:
-        msg = {"message": "Internal Server Error"}
+        msg = {"msg_": "Internal Server Error"}
 
     return make_response(jsonify(msg), code, headers)

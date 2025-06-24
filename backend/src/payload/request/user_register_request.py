@@ -10,8 +10,8 @@ class UserRegisterRequest():
     # access_token: str
     # roles: list =  []
 
-    class Config:
-        orm_mode = True 
+    # class Config:
+    #     orm_mode = True 
 
     def __init__(self, username, password, email, firstname, lastname):
         self.username = username
@@ -21,7 +21,7 @@ class UserRegisterRequest():
         self.firstname = firstname
         self.lastname = lastname
 
-    def register_dict(self):
+    def dict(self):
         return {
             "username": self.username,
             "password": self.password,
@@ -40,7 +40,7 @@ class UserLoginRequest:
         self.password = password
         self.email = email
         
-    def login_dict(self):
+    def dict(self):
         return {
             "email": self.email,
             "password": self.password

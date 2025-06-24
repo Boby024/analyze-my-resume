@@ -12,18 +12,21 @@ logger = Logger(name=__name__, log_file=log_path)
 
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    ENV = os.getenv('ENV').upper()
+    ENV = os.getenv('ENV').upper() if os.getenv('ENV') else "DEV"
     DEBUG = True if ENV == "DEV" else False
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_DATABASE_URI = os.getenv(f'SQLALCHEMY_DATABASE_URI_{ENV}')
     SECRET_KEY = os.getenv(f'SECRET_KEY{ENV}')
     PASSWORD_SECRET_KEY = os.getenv(f'PASSWORD_SECRET_KEY_{ENV}')
     JWT_SECRET_KEY = os.getenv(f'JWT_TOKEN_SECRET_{ENV}')
-    JWT_ACCESS_TOKEN_ALGORITHM = ["HS256"]
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=6) if ENV == "DEV" else timedelta(hours=3)
+    JWT_ACCESS_TOKEN_ALGORITHM = "HS256"
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=int(os.getenv(f'JWT_TOKEN_SECRET_DURATION_{ENV}'))) \
+        if os.getenv(f'JWT_TOKEN_SECRET_DURATION_{ENV}') else timedelta(hours=3)
     FLASK_THREADED = True if os.getenv(f'FLASK_THREADED_{ENV}').lower() == "true" else False
     FLASK_PORT = int(os.getenv(f'FLASK_PORT_{ENV}')) if os.getenv(f'FLASK_PORT_{ENV}') else 5000
     FLASK_HOST = os.getenv(f'FLASK_HOST_{ENV}') if os.getenv(f'FLASK_HOST_{ENV}') else "localhost"
+    ALLOWED_EXTENSIONS_FILE = os.getenv(f'ALLOWED_EXTENSIONS_FILE_{ENV}') if os.getenv(f'ALLOWED_EXTENSIONS_FILE_{ENV}') else {'pdf', 'csv', 'xlsx'}
+
 
     LOGS_PATH = os.getenv('LOGS_PATH')
     # log_path = f"{LOGS_PATH}/app_{datetime.now().strftime('%Y%m%d')}.log"
@@ -42,10 +45,11 @@ class Config:
     logger.info(f"ENV {ENV}")
     logger.info(f"log_path {log_path}")
     logger.info(f"SQLALCHEMY_DATABASE_URI: {SQLALCHEMY_DATABASE_URI}")
-    logger.info(f"JWT_TOKEN_SECRET: {JWT_SECRET_KEY}")
+    logger.info(f"JWT_SECRET_KEY: {JWT_SECRET_KEY}")
     logger.info(f"JWT_ACCESS_TOKEN_EXPIRES: {JWT_ACCESS_TOKEN_EXPIRES}")
     logger.info(f"JWT_ACCESS_TOKEN_EXPIRES: {PASSWORD_SECRET_KEY}")
     
     logger.info(f"FLASK_THREADED {FLASK_THREADED} AND {type(FLASK_THREADED)}")
     logger.info(f"HOST {FLASK_HOST}")
     logger.info(f"PORT {FLASK_PORT}")
+    logger.info(f"ALLOWED_EXTENSIONS_FILE {ALLOWED_EXTENSIONS_FILE}")
