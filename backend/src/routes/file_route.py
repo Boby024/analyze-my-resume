@@ -80,7 +80,7 @@ def delete_file(user):
             return response.response_msg("File deleted successfully", 200)
     except Exception as e:
         print(e)
-    return response.response_msg("Internal Error!", 400)
+    return response.response_msg("Internal Server Error!", 400)
 
 
 @file_bp.route('/pagination', methods=['GET'])

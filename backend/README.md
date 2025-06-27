@@ -57,6 +57,13 @@ source venv/bin/activate   # On Windows: venv\Scripts\activate</pre>
   </li>
   <li>Install dependencies:
     <pre>pip install -r requirements.txt</pre>
+    <span>Also run this once for NLTK:</span>
+    <pre>
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+    </pre>
   </li>
   <li>Run the Flask app:
     <pre>python3 run.py</pre>

@@ -40,11 +40,11 @@ def start(fjdr: FileJobDetailRequest):
 
     file = FileModel.query.filter_by(id=fjdr.file_id).first()
     if file:
-        fp_result = extractor.TextExtractor(content_type=file.content_type, content=file.content).extract()
+        fp_result = extractor.TextExtractor(content_type=file.content_type, content=file.content, title=fjd.title).extract()
 
         # save file detail after Text extraction, keywords extraction
-        fpr = FileProcessedRequest(keywords=fp_result["keywords"],
-                                   title=fp_result["title"],
+        fpr = FileProcessedRequest(title=fp_result["title"],
+                                   keywords=fp_result["keywords"],
                                    text_raw=fp_result["text_raw"],
                                    text=fp_result["text"],
                                    file_id=fjdr.file_id

@@ -25,7 +25,7 @@ class Config:
     FLASK_THREADED = True if os.getenv(f'FLASK_THREADED_{ENV}').lower() == "true" else False
     FLASK_PORT = int(os.getenv(f'FLASK_PORT_{ENV}')) if os.getenv(f'FLASK_PORT_{ENV}') else 5000
     FLASK_HOST = os.getenv(f'FLASK_HOST_{ENV}') if os.getenv(f'FLASK_HOST_{ENV}') else "localhost"
-    ALLOWED_EXTENSIONS_FILE = os.getenv(f'ALLOWED_EXTENSIONS_FILE_{ENV}') if os.getenv(f'ALLOWED_EXTENSIONS_FILE_{ENV}') else {'pdf', 'csv', 'xlsx'}
+    ALLOWED_EXTENSIONS_FILE = os.getenv(f'ALLOWED_EXTENSIONS_FILE_{ENV}') if os.getenv(f'ALLOWED_EXTENSIONS_FILE_{ENV}') else {'pdf', 'doc', 'docx'}
 
 
     LOGS_PATH = os.getenv('LOGS_PATH')
