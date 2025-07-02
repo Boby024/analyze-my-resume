@@ -1,0 +1,56 @@
+<mat-card class="pt-6 pb-6">
+  <div class="flex justify-between">
+    <div class="text-2xl font-bold text-[#000000] ml-4" [routerLink]="['/campaign-overview']">
+      AMR
+    </div>
+
+    <div class="flex flex-row space-x-2">
+      <div>
+        <button mat-button [matMenuTriggerFor]="menu1">Analyze</button>
+        <mat-menu #menu1="matMenu">
+          <button mat-menu-item [routerLink]="['/analyze-job']">Your Future Job</button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div class="flex flex-row space-x-4">
+      <div class="flex flex-row space-x-4" *ngIf="!isLoggedIn">
+        <div>
+          <button mat-stroked-button color="primary" [routerLink]="['/login']">Log in</button>
+        </div>
+        <div>
+          <button mat-flat-button color="primary" [routerLink]="['/signup']">Sign up</button>
+        </div>
+      </div>
+
+      <!-- <div *ngIf="isLoggedIn">
+        <button mat-fab color="warn" aria-label="profile-icon">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div> -->
+
+      <div *ngIf="isLoggedIn">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="goDashboard()">
+            <mat-icon>home</mat-icon>
+            Dashboard
+          </button>
+          <button mat-menu-item (click)="goSetting()">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+      </div>
+
+
+    </div>
+  </div>
+</mat-card>
